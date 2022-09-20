@@ -32,7 +32,8 @@ add_custom_command(
 
 set(SPDLOG_ACTIVE_LEVEL "SPDLOG_LEVEL_OFF" CACHE STRING "Set the logging level (e.g. SPDLOG_LEVEL_DEBUG, or SPDLOG_LEVEL_OFF)")
 
-add_compile_options(-DSPDLOG_ACTIVE_LEVEL=${SPDLOG_ACTIVE_LEVEL})
+add_compile_options(-DSPDLOG_ACTIVE_LEVEL=${SPDLOG_ACTIVE_LEVEL} -DMODULE_API_EXPORTS)
+
 
 # Library
 

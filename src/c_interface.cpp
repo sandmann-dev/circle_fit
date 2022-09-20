@@ -6,9 +6,19 @@
 
 using namespace circle_fit;
 
+#ifdef _WIN32
+#  ifdef MODULE_API_EXPORTS
+#    define MODULE_API __declspec(dllexport)
+#  else
+#    define MODULE_API __declspec(dllimport)
+#  endif
+#else
+#  define MODULE_API
+#endif
+
 extern "C"
 {
-int estimate_circle_taubin(double x[], double y[], int length, double *out_x, double *out_y, double *out_r)
+MODULE_API int estimate_circle_taubin(double x[], double y[], int length, double *out_x, double *out_y, double *out_r)
 {
     if(length < 3 || x==nullptr || y == nullptr || out_x == nullptr || out_y == nullptr || out_r == nullptr) {
         SPDLOG_ERROR("Invalid arguments");
@@ -26,7 +36,7 @@ int estimate_circle_taubin(double x[], double y[], int length, double *out_x, do
     return true;
 }
 
-int estimate_circle_lm(double x[], double y[], int length, double rxy_init[3], double rxy_out[3])
+MODULE_API int estimate_circle_lm(double x[], double y[], int length, double rxy_init[3], double rxy_out[3])
 {
     if(length < 3 || x==nullptr || y == nullptr || rxy_init == nullptr || rxy_out == nullptr) {
         SPDLOG_ERROR("Invalid arguments");
@@ -46,7 +56,7 @@ int estimate_circle_lm(double x[], double y[], int length, double rxy_init[3], d
     return true;
 }
 
-int estimate_circle(double x[], double y[], int length, double *out_x, double *out_y, double *out_r)
+MODULE_API int estimate_circle(double x[], double y[], int length, double *out_x, double *out_y, double *out_r)
 {
     if(length < 3 || x==nullptr || y == nullptr || out_x == nullptr || out_y == nullptr || out_r == nullptr) {
         SPDLOG_ERROR("Invalid arguments");
@@ -61,7 +71,7 @@ int estimate_circle(double x[], double y[], int length, double *out_x, double *o
     return true;
 }
 
-int estimate_circle_lm_trace(double x[], double y[], int length, double rxy_init[3], int *out_numiters, double **out_x, double **out_y, double **out_r, double **out_grad_norm, double **out_mse)
+MODULE_API int estimate_circle_lm_trace(double x[], double y[], int length, double rxy_init[3], int *out_numiters, double **out_x, double **out_y, double **out_r, double **out_grad_norm, double **out_mse)
 {
     if(length < 3 || x==nullptr || y == nullptr || rxy_init == nullptr || out_numiters == nullptr || out_x == nullptr || out_y == nullptr || out_r == nullptr || out_grad_norm == nullptr || out_mse == nullptr) {
         SPDLOG_ERROR("Invalid arguments");
