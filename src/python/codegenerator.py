@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
 import sympy as sp
-from sympy.printing.codeprinter import Assignment
-from sympy.printing.cxxcode import CXX17CodePrinter
+from sympy.codegen.ast import Assignment
+from sympy.printing.cxx import CXX17CodePrinter
 
 class CxxMatrixPrinter(CXX17CodePrinter):
-    def _print_list(self, list_of_exprs):
+    def _print_List(self, list_of_exprs):
         if all(isinstance(x, sp.Eq) for x in list_of_exprs):
             list_of_lhs = [x.lhs for x in list_of_exprs]
             list_of_rhs = [x.rhs for x in list_of_exprs]
@@ -19,8 +19,8 @@ class CxxMatrixPrinter(CXX17CodePrinter):
                 lines.append(self._print(ass))
         return '\n'.join(lines)
 
-from sympy.printing.ccode import _as_macro_if_defined
-from sympy.printing.ccode import precedence
+from sympy.printing.c import _as_macro_if_defined
+from sympy.printing.c import precedence
 class EigenMatrixPrinter(CxxMatrixPrinter):
     def _print_MatrixElement(self, expr):
         return "{0}({1},{2})".format(
@@ -52,6 +52,7 @@ class EigenMatrixPrinter(CxxMatrixPrinter):
 def codegen(expressions, template_path, output_path):
     p = EigenMatrixPrinter()
     p._print_Pow
+
     with open(template_path, 'r') as f:
         template = f.read()
     

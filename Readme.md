@@ -15,6 +15,7 @@ The corresponding code is in `src/matlab/example.m`.
 
 ## Build instructions
 Build requirements are a C++14 compiler, _cmake_ and _Python3_ for code generation.
+_Python3_ needs to have `sympy >= 1.10.1` installed.
 ```
 git clone git@github.com:RobMa/circle_fit.git
 cd circle_fit
