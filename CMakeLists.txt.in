@@ -28,7 +28,7 @@ ExternalProject_Add(Catch2
 )
 
 ExternalProject_Add(eigen
-    DOWNLOAD_COMMAND URL http://bitbucket.org/eigen/eigen/get/3.3.7.tar.bz2
+    DOWNLOAD_COMMAND URL https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.bz2
     DOWNLOAD_DIR "${EXTERNAL_PROJECTS_DIR}"
     DOWNLOAD_NAME "eigen-3.3.7.tar.bz2"
     SOURCE_DIR "${EXTERNAL_PROJECTS_DIR}/eigen"
